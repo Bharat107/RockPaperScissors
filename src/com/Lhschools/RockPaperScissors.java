@@ -1,4 +1,4 @@
-package com.Lhschools;
+package com.LickingHeights;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class RockPaperScissors {
- public enum Item {
+    public enum Item {
         FIRE, WATER, ICE;
         public List<Item> inferiorTo;
         public boolean inferiorTo(Item other) {
@@ -26,6 +26,8 @@ public class RockPaperScissors {
     private Item last = null;
 
     public static void main(String[] args) {
+        RockPaperScissors rps = new RockPaperScissors();
+        rps.play();
     }
     public void play() {
         init();
