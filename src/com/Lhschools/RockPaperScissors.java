@@ -1,4 +1,4 @@
-package com.LickingHeights;
+package com.Lhschools;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
