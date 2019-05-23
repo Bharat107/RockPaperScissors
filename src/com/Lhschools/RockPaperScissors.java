@@ -6,18 +6,18 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class RockPaperScissors {
-    public enum Item {
-        FIRE, WATER, ICE;
-        public List<Item> inferiorTo;
-        public boolean inferiorTo(Item other) {
-            return inferiorTo.contains(other);
-        }
-        static {
-            ICE.inferiorTo = Arrays.asList(FIRE);
-            FIRE.inferiorTo = Arrays.asList(WATER);
-            WATER.inferiorTo = Arrays.asList(ICE);
-        }
+public enum Item {
+    FIRE, WATER, ICE;
+    public List<Item> inferiorTo;
+    public boolean inferiorTo(Item other) {
+        return inferiorTo.contains(other);
     }
+    static {
+        ICE.inferiorTo = Arrays.asList(FIRE);
+        FIRE.inferiorTo = Arrays.asList(WATER);
+        WATER.inferiorTo = Arrays.asList(ICE);
+    }
+}
     private static DecimalFormat DECIMAL_FORMATTER = new DecimalFormat(".##");
     public static final Random RANDOM = new Random();
     private int[] stats = new int[] {0, 0, 0};
@@ -113,5 +113,3 @@ public class RockPaperScissors {
         return losesTo.get(RANDOM.nextInt(losesTo.size()));
     }
 }
-     
- 
