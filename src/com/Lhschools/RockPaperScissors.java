@@ -64,5 +64,52 @@ public class RockPaperScissors {
             }
             System.out.print("PICK: ");
         }
+        in.close();
+        System.out.println("\n");
+        System.out.println("Win Percentage");
+        int total = stats[0] + stats[1] + stats[2];
+        System.out.println("User : " + stats[0] + " - " +
+                DECIMAL_FORMATTER.format(stats[0] / (float) total * 100f) + "%");
+        System.out.println("Draw : " + stats[1] + " - " +
+                DECIMAL_FORMATTER.format(stats[1] / (float) total * 100f) + "%");
+        System.out.println("Computer : " + stats[2] + " - " +
+                DECIMAL_FORMATTER.format(stats[2] / (float) total * 100f) + "%");
+    }
+    private void init(){
+        int length = Item.values().length;
+        markovChain = new int[length][length];
+        for (int i = 0; i < length; i++){
+            for (int j = 0; j < length; j++){
+                markovChain[i][j] = 0;
+            }
+        }
+    }
+    private void newMarkovChain(Item prev, Item next){
+        markovChain[prev.ordinal()][next.ordinal()]++;
+    }
+    private Item nextPick(Item prev) {
+        if (nbThrows < 1) {
+            return Item.values()[RANDOM.nextInt(Item.values().length)];
+        }
+        System.out.println("in NextMove");
+        System.out.println("Previous throw ordinal: "+ prev.ordinal());
+        int nextIndex = 0;
+        System.out.println("next index: "+ nextIndex);
+        for (int i = 0; i < Item.values().length; i++){
+            int prevIndex = prev.ordinal();
+            if (markovChain[prevIndex][i] > markovChain[prevIndex][nextIndex]){
+                System.out.println("in for loop: markov chain check: "+ markovChain[prevIndex][i]+ " greater than "+ markovChain[prevIndex][nextIndex]+ " is "+(markovChain[prevIndex][i] > markovChain[prevIndex][nextIndex]) );
+                nextIndex = i;
+            }
+            System.out.println("in for loop:  index: "+ i);
+            System.out.println("in for loop: nextindex: "+ nextIndex);
+        }
+        Item predictedNext = Item.values()[nextIndex];
+        List<Item> losesTo = predictedNext.inferiorTo;
+        System.out.println("prediction: "+ predictedNext);
+        System.out.println("prediction to win: "+ predictedNext.inferiorTo);
+        return losesTo.get(RANDOM.nextInt(losesTo.size()));
+    }
+}
      
  
